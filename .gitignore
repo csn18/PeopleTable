@@ -1,0 +1,12 @@
+.env
+*.pyc
+
+.idea/
+venv/
+__pycache__/
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+db.sqlite3
