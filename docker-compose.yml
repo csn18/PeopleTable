@@ -1,0 +1,45 @@
+version: "3"
+
+services:
+  database:
+    container_name: 'postgres'
+    image: postgres
+    ports:
+      - '5433:5432'
+    environment:
+      POSTGRES_DB: $VAR_POSTGRES_DB
+      POSTGRES_USER: $VAR_POSTGRES_USER
+      POSTGRES_PASSWORD: $VAR_POSTGRES_PASSWORD
+      POSTGRES_HOST_AUTH_METHOD: $VAR_POSTGRES_HOST_AUTH_METHOD
+
+  redis:
+    container_name: 'redis'
+    image: redis
+    command: 'redis-server'
+    ports:
+      - "6379:6379"
+
+  backend:
+    container_name: 'backend'
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: sh -c 'python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000'
+    restart: always
+    volumes:
+      - .:/app
+    ports:
+      - '8000:8000'
+    depends_on:
+      - database
+
+  celery:
+    container_name: 'celery-worker'
+    build: .
+    command: 'celery -A PeopleTable worker'
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+      - backend
