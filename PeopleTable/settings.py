@@ -6,9 +6,9 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-_r9qkc3d^9iug=&amse!djuf8$b3zogs-_f)(lbn!-qv82_3so'
+SECRET_KEY = os.getenv('VAR_SECRET_KEY')
 
-DEBUG = True
+DEBUG = os.getenv('VAR_DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
@@ -20,7 +20,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'psycopg2'
+    'psycopg2',
+
+    'Table.apps.TableConfig'
 ]
 
 MIDDLEWARE = [
@@ -96,9 +98,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REDIS_HOST = 'redis'
 REDIS_PORT = '6379'
 
-CELERY_BROKER_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}'
+CELERY_BROKER_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}/0'
 CELERY_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
-CELERY_RESULT_BACKEND = f'redis://{REDIS_HOST}:{REDIS_PORT}'
+CELERY_RESULT_BACKEND = f'redis://{REDIS_HOST}:{REDIS_PORT}/0'
 
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'

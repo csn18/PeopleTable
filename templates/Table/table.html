@@ -1,0 +1,107 @@
+{% extends 'template.html' %}
+{% load static %}
+
+{% block title %}Таблица{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <header>
+            <div class="account">
+                <div class="account__avatar">
+                    <img src="{% static 'icons/avatar.jpg' %}" alt="">
+                </div>
+                <div class="account__name">
+                    Хайруллин Расим
+                </div>
+                <div class="account__more">
+                    <img src="{% static 'icons/Ellipse.svg' %}" alt="">
+                    <img src="{% static 'icons/Ellipse.svg' %}" alt="">
+                    <img src="{% static 'icons/Ellipse.svg' %}" alt="">
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <section class='left__menu'>
+                <div class="menu__item">
+                    <img src="{% static 'icons/zapros.svg' %}" alt="">
+                </div>
+                <div class="menu__item">
+                    <img src="{% static 'icons/spravochnik.svg' %}" alt="">
+                </div>
+                <div class="menu__item">
+                    <img src="{% static 'icons/jurnal_zaprosov.svg' %}" alt="">
+                </div>
+                <div class="menu__item">
+                    <img src="{% static 'icons/settings.svg' %}" alt="">
+                </div>
+            </section>
+
+            <section class='main__content'>
+
+                <section class="sub__menu">
+                    <div class="sub__menu-item">
+                        <img src="{% static 'icons/Table_Edit.svg' %}" alt="">
+                    </div>
+                    <div class="sub__menu-item">
+                        <img src="{% static 'icons/Tab Desktop Multiple Bottom.svg' %}" alt="">
+                    </div>
+                    <div class="sub__menu-item">
+                        <img src="{% static 'icons/Document PDF.svg' %}" alt="">
+                    </div>
+                    <div class="sub__menu-item">
+                        <img src="{% static 'icons/History.svg' %}" alt="">
+                    </div>
+                    <div class="sub__menu-item">
+                        <img src="{% static 'icons/Shape.svg' %}" alt="">
+                    </div>
+                    <button type="submit" class="get__data">
+                        Получить данные
+                    </button>
+                </section>
+
+                <section class="table">
+                    <div class="table__filter table__grid">
+                        <div class="table__col">
+                            <span>Имя</span>
+                            <span class="table__col-sort sort__name">
+                                <img src="{% static 'icons/sort.svg' %}" alt="">
+                            </span>
+                        </div>
+                        <div class="table__col">
+                            <span>Возраст</span>
+                            <span class="table__col-sort sort__age">
+                                <img src="{% static 'icons/sort.svg' %}" alt="">
+                            </span>
+                        </div>
+                        <div class="table__col">
+                            <span>Возрастная группа</span>
+                        </div>
+                    </div>
+
+                    <div class="table__search table__grid">
+                        <div class="table__col-search">
+                            <input type="text" class="table__search-field search__name">
+                            <img src="{% static 'icons/magnifier.svg'  %}" alt="" class="table__search-magnifier">
+                        </div>
+                        <div class="table__col-search">
+                            <input type="number" class="table__search-field search__age">
+                            <img src="{% static 'icons/magnifier.svg'  %}" alt="" class="table__search-magnifier">
+                        </div>
+                    </div>
+
+                    <div class="table__items">
+                        {% for people in all_peoples %}
+                            <div class="table__item table__grid">
+                                <span class="table__item-content table__item-name">{{ people.name }}</span>
+                                <span class="table__item-content table__item-age">{{ people.age }}</span>
+                                <span class="table__item-content table__item-group">{{ people.group }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </section>
+
+            </section>
+        </main>
+    </div>
+{% endblock %}
