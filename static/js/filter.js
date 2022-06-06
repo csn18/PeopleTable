@@ -5,15 +5,15 @@ const searchNameField = document.querySelector('.search__name')
 const searchAgeField = document.querySelector('.search__age')
 let allSearchFields = document.querySelectorAll('.table__search-field')
 const getDataButton = document.querySelector('.get__data')
+const successMessageImage = document.querySelector('.success__message-image')
 
 getDataButton.addEventListener('click', (event) => {
     event.preventDefault()
     axios.get(`${document.URL}get/data`).then((response) => {
         if (response.data.status === 'ok') {
+            successMessageImage.classList.add('active')
             setTimeout(() => {
-                axios.get(`${document.URL}get/peoples`).then((response) => {
-                    updateDateTable(response.data)
-                })
+                document.location.reload();
             }, 1000)
         }
     })
@@ -32,43 +32,44 @@ const updateDateTable = (data) => {
         allTableItems.forEach(item => {
             item.classList.add('animate__fadeOut')
         })
-        setTimeout(() => {
-            allTableItems.forEach(item => item.remove())
-            data.forEach(item => {
-                // Создание элемента таблицы и добавление классов
-                let newTabItem = document.createElement('div')
-                newTabItem.classList.add('table__item')
-                newTabItem.classList.add('table__grid')
-                newTabItem.classList.add('animate__animated')
-                newTabItem.classList.add('animate__fadeIn')
-                newTabItem.classList.add('animate__faster')
-
-                // Создание ячеек в элементе таблицы, добавление классов и текста
-                let newSpanName = document.createElement('span')
-                let newSpanAge = document.createElement('span')
-                let newSpanGroup = document.createElement('span')
-
-                newSpanName.classList.add('table__item-content')
-                newSpanName.classList.add('table__item-name')
-                newSpanAge.classList.add('table__item-content')
-                newSpanAge.classList.add('table__item-age')
-                newSpanGroup.classList.add('table__item-content')
-                newSpanGroup.classList.add('table__item-group')
-
-                newSpanName.innerText = item.name
-                newSpanAge.innerText = item.age
-                newSpanGroup.innerText = item.group
-
-                // Добавление ячеек в элемент таблицы
-                newTabItem.appendChild(newSpanName)
-                newTabItem.appendChild(newSpanAge)
-                newTabItem.appendChild(newSpanGroup)
-
-                // Добавление элемента таблицы на экран
-                tableItems.appendChild(newTabItem)
-            })
-        }, 500)
+        allTableItems.forEach(item => item.remove())
     }
+
+    setTimeout(() => {
+        data.forEach(item => {
+            // Создание элемента таблицы и добавление классов
+            let newTabItem = document.createElement('div')
+            newTabItem.classList.add('table__item')
+            newTabItem.classList.add('table__grid')
+            newTabItem.classList.add('animate__animated')
+            newTabItem.classList.add('animate__fadeIn')
+            newTabItem.classList.add('animate__faster')
+
+            // Создание ячеек в элементе таблицы, добавление классов и текста
+            let newSpanName = document.createElement('span')
+            let newSpanAge = document.createElement('span')
+            let newSpanGroup = document.createElement('span')
+
+            newSpanName.classList.add('table__item-content')
+            newSpanName.classList.add('table__item-name')
+            newSpanAge.classList.add('table__item-content')
+            newSpanAge.classList.add('table__item-age')
+            newSpanGroup.classList.add('table__item-content')
+            newSpanGroup.classList.add('table__item-group')
+
+            newSpanName.innerText = item.name
+            newSpanAge.innerText = item.age
+            newSpanGroup.innerText = item.group
+
+            // Добавление ячеек в элемент таблицы
+            newTabItem.appendChild(newSpanName)
+            newTabItem.appendChild(newSpanAge)
+            newTabItem.appendChild(newSpanGroup)
+
+            // Добавление элемента таблицы на экран
+            tableItems.appendChild(newTabItem)
+        })
+    }, 500)
 }
 
 sortNameButton.addEventListener('click', () => {
