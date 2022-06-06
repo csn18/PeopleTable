@@ -10,9 +10,11 @@ getDataButton.addEventListener('click', (event) => {
     event.preventDefault()
     axios.get(`${document.URL}get/data`).then((response) => {
         if (response.data.status === 'ok') {
-            axios.get(`${document.URL}get/peoples`).then((response) => {
-                updateDateTable(response.data)
-            })
+            setTimeout(() => {
+                axios.get(`${document.URL}get/peoples`).then((response) => {
+                    updateDateTable(response.data)
+                })
+            }, 1000)
         }
     })
 })
