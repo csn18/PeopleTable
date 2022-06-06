@@ -1,7 +1,7 @@
 import json
 
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from .models import People
 from .services import get_peoples_order_by, get_peoples_by_start_from, get_peoples
@@ -72,3 +72,7 @@ def search_by_age(request):
             response.append({'name': people.name, 'age': people.age, 'group': people.group.group_name})
         json.dumps(response)
         return JsonResponse(response, safe=False)
+
+
+def handler_404(request, exception):
+    return redirect('table_page')
