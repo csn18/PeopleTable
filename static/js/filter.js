@@ -14,7 +14,7 @@ getDataButton.addEventListener('click', (event) => {
             successMessageImage.classList.add('active')
             setTimeout(() => {
                 document.location.reload();
-            }, 1000)
+            }, 2000)
         }
     })
 })
