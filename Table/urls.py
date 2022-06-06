@@ -9,5 +9,4 @@ urlpatterns = [
     path('search/name', search_by_name, name='search_by_name'),
     path('search/age', search_by_age, name='search_by_age'),
     path('get/data', get_data, name='get_data'),
-    path('get/peoples', get_peoples_data, name='get_peoples_data'),
 ]
