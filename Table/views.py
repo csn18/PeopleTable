@@ -21,16 +21,6 @@ def table_page(request):
     return render(request, 'Table/table.html', locals())
 
 
-def get_peoples_data(request):
-    """Функция возвращает JSON людей"""
-    all_peoples = get_peoples()
-    response = []
-    for people in all_peoples:
-        response.append({'name': people.name, 'age': people.age, 'group': people.group.group_name})
-    json.dumps(response)
-    return JsonResponse(response, safe=False)
-
-
 def filter_name(request):
     """Функция фильтрации по имени"""
     all_peoples = get_peoples_order_by('name')

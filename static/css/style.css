@@ -203,3 +203,31 @@ main {
     position: relative;
     right: 1rem;
 }
+
+.success__message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 1rem;
+}
+
+.success__message-image {
+    display: none;
+    width: 20px;
+    height: 20px;
+}
+
+.success__message-image.active {
+    display: block;
+    animation: showSuccessMessage .3s;
+}
+
+
+@keyframes showSuccessMessage {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
